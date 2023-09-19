@@ -1,7 +1,10 @@
+const uploadToAws = require("../imgUpload");
+
 const productModel = require("../models/products");
 const fs = require("fs");
 const path = require("path");
 
+const amazons3 = 'https://boutique-project.s3.eu-north-1.amazonaws.com/';
 class Product {
   // Delete Image from uploads -> products folder
   static deleteImages(images, mode) {
@@ -42,9 +45,19 @@ class Product {
   }
 
   async postAddProduct(req, res) {
-    let { pName, pDescription, pPrice, pQuantity, pCategory, pOffer, pStatus } =
-      req.body;
-    let images = req.files;
+    const formData = req.body;
+    let { pName, pDescription, pPrice, pImage, pQuantity, pCategory, pOffer, pStatus } = req.body;
+    let images;
+    console.log(formData.get("pPrice"));
+  
+    let resuu = uploadToAws(req);
+    console.log(resuu);
+  
+    console.log(req.body);
+    for(file in req.files) {
+      images.push_back(`${path}+${file.original.name}`);
+    }
+    console.log(images);
     // Validation
     if (
       !pName |

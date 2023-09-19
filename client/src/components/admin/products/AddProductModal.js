@@ -16,6 +16,7 @@ const AddProductDetail = ({ categories }) => {
     pStatus: "Active",
     pImage: null, // Initial value will be null or empty array
     pCategory: "",
+    pImage: "",
     pPrice: "",
     pOffer: 0,
     pQuantity: "",
@@ -58,6 +59,7 @@ const AddProductDetail = ({ categories }) => {
           pStatus: "Active",
           pCategory: "",
           pPrice: "",
+          pImage: "",
           pQuantity: "",
           pOffer: 0,
           success: responseData.success,

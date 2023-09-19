@@ -22,17 +22,18 @@ export const createPorductImage = async ({ pImage }) => {
 export const createProduct = async ({
   pName,
   pDescription,
-  pImage,
   pStatus,
   pCategory,
   pQuantity,
   pPrice,
+  pImage,
   pOffer,
 }) => {
   /* Most important part for uploading multiple image  */
   let formData = new FormData();
   for (const file of pImage) {
     formData.append("pImage", file);
+    
   }
   /* Most important part for uploading multiple image  */
   formData.append("pName", pName);
@@ -42,9 +43,12 @@ export const createProduct = async ({
   formData.append("pQuantity", pQuantity);
   formData.append("pPrice", pPrice);
   formData.append("pOffer", pOffer);
-
+  console.log(formData.get("pPrice"));
   try {
-    let res = await axios.post(`${apiURL}/api/product/add-product`, formData);
+    const config = {     
+      headers: { 'content-type': 'multipart/form-data' }
+  }
+    let res = await axios.post(`${apiURL}/api/product/add-product`, formData, config);
     return res.data;
   } catch (error) {
     console.log(error);

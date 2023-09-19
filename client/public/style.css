@@ -15449,6 +15449,7 @@ video {
 }
 .w-full1 {
   height: 300px;
+  width: 100%;
 }
 
 .w-screen {
